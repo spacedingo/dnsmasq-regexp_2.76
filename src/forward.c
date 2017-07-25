@@ -147,11 +147,6 @@ static unsigned int search_servers(time_t now, struct all_addr **addrpp, unsigne
       }
     else if (serv->flags & SERV_HAS_DOMAIN)
       {
-	unsigned int domainlen = strlen(serv->domain);
-	char *matchstart = qdomain + namelen - domainlen;
-	if (namelen >= domainlen &&
-	    hostname_isequal(matchstart, serv->domain) &&
-	    (domainlen == 0 || namelen == domainlen || *(matchstart-1) == '.' ))
 	unsigned int domainlen = matchlen;
 	int serverhit = 0;
 
@@ -183,8 +178,7 @@ static unsigned int search_servers(time_t now, struct all_addr **addrpp, unsigne
 	       serverhit = 1;
 	  }
 
-	if (serverhit)
-	  {
+	if (serverhit)	  {
 	    if ((serv->flags & SERV_NO_REBIND) && norebind)	
 	      *norebind = 1;
 	    else
