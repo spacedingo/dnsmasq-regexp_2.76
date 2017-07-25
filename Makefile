@@ -61,6 +61,8 @@ ct_cflags =     `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK $(PKG_CON
 ct_libs =       `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK $(PKG_CONFIG) --libs libnetfilter_conntrack`
 lua_cflags =    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --cflags lua5.2` 
 lua_libs =      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --libs lua5.2` 
+regex_cflags =	`echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_REGEX $(PKG_CONFIG) --cflags libpcre` 
+regex_libs =  	`echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_REGEX $(PKG_CONFIG) --libs libpcre` 
 nettle_cflags = `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_DNSSEC $(PKG_CONFIG) --cflags nettle hogweed`
 nettle_libs =   `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_DNSSEC $(PKG_CONFIG) --libs nettle hogweed`
 gmp_libs =      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_DNSSEC NO_GMP --copy -lgmp`
@@ -84,8 +86,8 @@ hdrs = dnsmasq.h config.h dhcp-protocol.h dhcp6-protocol.h \
 all : $(BUILDDIR)
 	@cd $(BUILDDIR) && $(MAKE) \
  top="$(top)" \
- build_cflags="$(version) $(dbus_cflags) $(idn2_cflags) $(idn_cflags) $(ct_cflags) $(lua_cflags) $(nettle_cflags)" \
- build_libs="$(dbus_libs) $(idn2_libs) $(idn_libs) $(ct_libs) $(lua_libs) $(sunos_libs) $(nettle_libs) $(gmp_libs)" \
+ build_cflags="$(version) $(dbus_cflags) $(idn2_cflags) $(idn_cflags) $(ct_cflags) $(lua_cflags) $(nettle_cflags) $(regex_cflags)" \
+ build_libs="$(dbus_libs) $(idn2_libs) $(idn_libs) $(ct_libs) $(lua_libs) $(regex_libs) $(sunos_libs) $(nettle_libs) $(gmp_libs)" \
  -f $(top)/Makefile dnsmasq 
 
 mostly_clean :
@@ -108,8 +110,8 @@ all-i18n : $(BUILDDIR)
 	@cd $(BUILDDIR) && $(MAKE) \
  top="$(top)" \
  i18n=-DLOCALEDIR=\'\"$(LOCALEDIR)\"\' \
- build_cflags="$(version) $(dbus_cflags) $(idn2_cflags) $(idn_cflags) $(ct_cflags) $(lua_cflags) $(nettle_cflags)" \
- build_libs="$(dbus_libs) $(idn2_libs) $(idn_libs) $(ct_libs) $(lua_libs) $(sunos_libs) $(nettle_libs) $(gmp_libs)"  \
+ build_cflags="$(version) $(dbus_cflags) $(idn2_cflags) $(idn_cflags) $(ct_cflags) $(lua_cflags) $(regex_cflags) $(nettle_cflags)" \
+ build_libs="$(dbus_libs) $(idn2_libs) $(idn_libs) $(ct_libs) $(lua_libs) $(regex_libs) $(sunos_libs) $(nettle_libs) $(gmp_libs)"  \
  -f $(top)/Makefile dnsmasq
 	for f in `cd $(PO); echo *.po`; do \
 		cd $(top) && cd $(BUILDDIR) && $(MAKE) top="$(top)" -f $(top)/Makefile $${f%.po}.mo; \
