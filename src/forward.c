@@ -491,7 +491,7 @@ static int forward_query(int udpfd, union mysockaddr *udpaddr,
 	     must be NULL also. */
 	  
 	  if (type == (start->flags & SERV_TYPE) &&
-	      !(start->flags & SERV_LITERAL_ADDRESS) &&
+	      !(start->flags & (SERV_LITERAL_ADDRESS | SERV_LOOP)) &&
 	      (type != SERV_HAS_DOMAIN || match_domain_for_forward(domain, start)))
 	    {
 	      int fd;
