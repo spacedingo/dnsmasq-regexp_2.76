@@ -85,7 +85,7 @@ hdrs = dnsmasq.h config.h dhcp-protocol.h dhcp6-protocol.h \
 all : $(BUILDDIR)
 	@cd $(BUILDDIR) && $(MAKE) \
  top="$(top)" \
- build_cflags="$(version) $(dbus_cflags) $(idn_cflags) $(ct_cflags) $(lua_cflags) $(regex_cflags)" $(nettle_cflags)" \
+ build_cflags="$(version) $(dbus_cflags) $(idn_cflags) $(ct_cflags) $(lua_cflags) $(regex_cflags) $(nettle_cflags)" \
  build_libs="$(dbus_libs) $(idn_libs) $(ct_libs) $(lua_libs) $(sunos_libs) $(regex_libs) $(nettle_libs) $(gmp_libs)" \
  -f $(top)/Makefile dnsmasq 
 
