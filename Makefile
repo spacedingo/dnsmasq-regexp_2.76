@@ -27,6 +27,7 @@ DESTDIR       =
 CFLAGS        = -Wall -W -O2
 LDFLAGS       = 
 #COPTS         = -DNO_IPV6
+COPTS         = 
 RPM_OPT_FLAGS = 
 LIBS          = 
 
