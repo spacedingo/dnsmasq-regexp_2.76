@@ -393,6 +393,10 @@ static char *compile_opts =
 "no-"
 #endif
 "DBus "
+#ifndef HAVE_REGEX
+"no-"
+#endif
+"regex "
 #ifndef LOCALEDIR
 "no-"
 #endif
