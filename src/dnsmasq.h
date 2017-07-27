@@ -137,6 +137,10 @@ extern int capget(cap_user_header_t header, cap_user_data_t data);
 #include <priv.h>
 #endif
 
+#ifdef HAVE_REGEX
+#  include <pcre.h>
+#endif
+
 /* daemon is function in the C library.... */
 #define daemon dnsmasq_daemon
 
@@ -479,6 +483,7 @@ union mysockaddr {
 #define SERV_COUNTED         512  /* workspace for log code */
 #define SERV_USE_RESOLV     1024  /* forward this domain in the normal way */
 #define SERV_NO_REBIND      2048  /* inhibit dns-rebind protection */
+#define SERV_IS_REGEX       4096  /* server entry is a regex */
 #define SERV_FROM_FILE      4096  /* read from --servers-file */
 #define SERV_LOOP           8192  /* server causes forwarding loop */
 #define SERV_DO_DNSSEC     16384  /* Validate DNSSEC when using this server */
@@ -500,6 +505,10 @@ struct server {
   char interface[IF_NAMESIZE+1];
   struct serverfd *sfd; 
   char *domain; /* set if this server only handles a domain. */ 
+#ifdef HAVE_REGEX
+  pcre *regex;
+  pcre_extra *pextra;
+#endif
   int flags, tcpfd, edns_pktsz;
   unsigned int queries, failed_queries;
 #ifdef HAVE_LOOP
