@@ -1,6 +1,5 @@
 ### Dnsmasq version 2.76 - with regex and extended cache limit
-
-###### Example dnsmasq.conf
+Example dnsmasq.conf
 `address=/:myvpn[0-9].company.com:/4.1.1.1`
 
 ##### Compiling
