@@ -1,10 +1,10 @@
-# dnsmasq-regexp_2.76
+### Dnsmasq version 2.76 - with regex and extended cache limit
 
-Dnsmasq version 2.76
+###### Example dnsmasq.conf
+`address=/:myvpn[0-9].company.com:/4.1.1.1`
 
-Example dnsmasq.conf address=/:myvpn[0-9].company.com:/4.1.1.1
-
-Install dependencies:
+##### Compiling
+###### Install dependencies:
 -On Debian 8/9 or Ubuntu 16/17
 apt-get install make gcc libdbus-1-dev libidn11-dev libnetfilter-conntrack-dev liblua5.1-dev libpcre++-dev nettle-dev libhogweed4 -y
 -On CentOS 7
